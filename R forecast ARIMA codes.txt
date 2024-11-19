@@ -1,0 +1,12 @@
+TABLEAU - CAL FIELD-
+
+
+SCRIPT_REAL("
+library (forecast);
+myts <- ts(.arg1, start = c(2014), frequency = 1);
+farima <- auto.arima(myts)
+fcast <- forecast(farima, h=.arg2[1]);
+n<- length(.arg1);
+append(.arg1[(.arg2[1]+1):n], fcast$mean, after = n- .arg2[1])",
+SUM([Close (Custom SQL Query)]),
+[Forecast period])
